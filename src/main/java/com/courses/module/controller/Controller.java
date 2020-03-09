@@ -17,6 +17,7 @@ import com.courses.module.DTO.UpdateDTO;
 import com.courses.module.model.Categories;
 import com.courses.module.model.Course;
 import com.courses.module.model.Levels;
+import com.courses.module.model.Videos;
 import com.courses.module.services.CourseService;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -50,6 +51,10 @@ public class Controller {
 	public List<Course>  viewbyname(@PathVariable String name) {
 		return service.viewbyname(name);
 	}
+	@GetMapping("/viewvideos")
+	public List<Videos>  viewvideos() {
+		return service.viewvideos();
+	}
 
 	@GetMapping("/new")
 	public String insertCourse(@RequestBody CourseDTO dto) {
@@ -64,8 +69,8 @@ public class Controller {
 	}
 
 	@DeleteMapping("/remove/{id}")
-	public String deleteCourse(@PathVariable int id) {
-		return service.delete(id);
+	public void deleteCourse(@PathVariable int id) {
+		 service.delete(id);
 	}
 	@GetMapping("/modifystatus/{id}")
 	public boolean modifystatus(@PathVariable int id) {

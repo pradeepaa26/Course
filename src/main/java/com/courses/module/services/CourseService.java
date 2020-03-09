@@ -12,6 +12,7 @@ import com.courses.module.DTO.UpdateDTO;
 import com.courses.module.model.Categories;
 import com.courses.module.model.Course;
 import com.courses.module.model.Levels;
+import com.courses.module.model.Videos;
 
 @Service
 public class CourseService {
@@ -65,14 +66,14 @@ public List<Categories> viewcategory() {
 		}
 	}
 	@Transactional
-	public String delete(int id) {
+	public void delete(int id) {
 		if(dao.isIdExists(id))
 		{
-		return dao.delete(id);
+		 dao.delete(id);
 	}
 		else
 		{
-			return "id not found";
+			System.out.println( "id doesnot found");
 		}
 	}
 	@Transactional
@@ -94,6 +95,10 @@ public List<Categories> viewcategory() {
 		{
 			return false;
 		}
+	}
+	public List<Videos> viewvideos() {
+		
+		return dao.viewvideos();
 	}
 	
 }

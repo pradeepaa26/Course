@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.courses.module.model.Categories;
 import com.courses.module.model.Course;
 import com.courses.module.model.Levels;
+import com.courses.module.model.Videos;
 @Repository
 public interface CourseDAOinterface {
 	
@@ -19,8 +20,9 @@ public interface CourseDAOinterface {
 	public boolean isIdExists(int id);
 	public boolean isActive(int id);
 	public String update(Course c);
-	public String delete(int id);
+	public void delete(int id);
 	public List<Course> viewbyname(String name);
 	public boolean modifystatus(int id);
+	public List<Videos> viewvideos();
 	
 }

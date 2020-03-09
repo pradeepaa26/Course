@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.courses.module.model.Categories;
 import com.courses.module.model.Course;
 import com.courses.module.model.Levels;
+import com.courses.module.model.Videos;
 
 @Repository
 public class CourseDAO implements CourseDAOinterface{
@@ -34,6 +35,12 @@ public class CourseDAO implements CourseDAOinterface{
 		List<Categories> list=em.createQuery("from Categories",Categories.class).getResultList();
 		return list;
 	}
+	@Override
+	public List<Videos> viewvideos() {
+		List<Videos> list=em.createQuery("from Videos",Videos.class).getResultList();
+		return list;
+	}
+
     @Override
 	public Course viewbyId(int id){
 		/*
@@ -78,15 +85,15 @@ public class CourseDAO implements CourseDAOinterface{
 	}
 
 	@Override
-	public String delete(int id) {
+	public void delete(int id) {
 		Course c=em.find(Course.class, id);
-		if((isActive(id)))
+		if(isIdExists(id))
 	     {
 		em.remove(c);
-		return "deletion succesful";
+		System.out.println( "deletion succesful");
 	      }
 	else {
-		return "id doesnt exists";
+		System.out.println("id doesnt exists");
 	}
 	}
 	@Override
@@ -113,5 +120,5 @@ public class CourseDAO implements CourseDAOinterface{
 		return course.isActive();
 	}
 	}
-
+	
 }
