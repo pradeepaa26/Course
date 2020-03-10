@@ -1,15 +1,13 @@
 package com.courses.module.DAO;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import com.courses.module.model.Categories;
 import com.courses.module.model.Course;
@@ -54,8 +52,13 @@ public class CourseDAO implements CourseDAOinterface{
 }
 
 	@Override
-	public void insert(Course c) {
-		em.persist(c);
+	public void insert(Course course) {
+		if(!CollectionUtils.isEmpty(course.getTexts())) 
+		{
+		course.getTexts().forEach( textObj -> textObj.setCourses(course));
+		}
+		course.getCourseSubscribedVideoObj().forEach(videoobj->videoobj.setCourse(course));
+		em.persist(course);
 	}
 	@Override
 	public boolean isIdExists(int id) {
@@ -90,19 +93,11 @@ public class CourseDAO implements CourseDAOinterface{
 		if(isIdExists(id))
 	     {
 		em.remove(c);
-		System.out.println( "deletion succesful");
+		System.out.println("deletion succesful");
 	      }
 	else {
 		System.out.println("id doesnt exists");
 	}
-	}
-	@Override
-	public List<Course> viewbyname(String name) {
-	 Query query=em.createQuery("from Course c where c.name=:coursename",Course.class);
-		  query.setParameter("coursename",name);
-		  List<Course> list=query.getResultList();
-		  return  list;
-		 
 	}
 	@Override
 	@Transactional

@@ -7,7 +7,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.courses.module.DAO.CourseDAOinterface;
-import com.courses.module.DTO.CourseDTO;
 import com.courses.module.DTO.UpdateDTO;
 import com.courses.module.model.Categories;
 import com.courses.module.model.Course;
@@ -23,12 +22,10 @@ public class CourseService {
 	Categories category=new Categories();
 	@Transactional
 	public List<Course> view() {
-		//System.out.print("service called");
 		return dao.views();
 	}
 	@Transactional
 	public List<Levels> viewlevel() {
-		//System.out.print("service called");
 		return dao.viewlevel();
 	}
 public List<Categories> viewcategory() {
@@ -36,13 +33,8 @@ public List<Categories> viewcategory() {
 		return dao.viewcategory();
 	}
 	@Transactional
-	public void insert(CourseDTO c) {
-		course.setId(c.getId());
-		course.setName(c.getName());
-		level.setId(c.getLevel_id());
-		category.setId(c.getCategory_id());
-		
-	    dao.insert(course);
+	public void insert(Course c) {	
+	    dao.insert(c);
 		
 	}
 	@Transactional
@@ -54,7 +46,7 @@ public List<Categories> viewcategory() {
 		course.setSlug(dto.getSlug());
 		course.setTag(dto.getTag());
 		course.setLevelOverride(dto.isLevelOverride());
-		course.setAvailable_for(dto.isAvailable_for());
+		course.setAvailable_for(dto.getAvailable_for());
 		course.setMeta_desc(dto.getDescription());
 		if(dao.isIdExists(dto.getId()))
 		{
@@ -82,9 +74,6 @@ public List<Categories> viewcategory() {
 			return dao.viewbyId(id);
 		else
 			return null;
-	}
-	public List<Course> viewbyname(String name) {
-			return dao.viewbyname(name);
 	}
 	public boolean modifystatus(int id) {
 		if(dao.isIdExists(id))

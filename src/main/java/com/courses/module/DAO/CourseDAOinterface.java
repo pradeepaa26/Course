@@ -21,7 +21,6 @@ public interface CourseDAOinterface {
 	public boolean isActive(int id);
 	public String update(Course c);
 	public void delete(int id);
-	public List<Course> viewbyname(String name);
 	public boolean modifystatus(int id);
 	public List<Videos> viewvideos();
 	

@@ -8,7 +8,7 @@ public class UpdateDTO {
 	private String tag;
 	private String slug;
 	private boolean isLevelOverride;
-	private boolean available_for;
+	private int available_for;
 	private String description;
 	/*
 	 * private String meta_key; private String meta_desc; private String created_by;
@@ -58,10 +58,11 @@ public class UpdateDTO {
 	public void setLevelOverride(boolean isLevelOverride) {
 		this.isLevelOverride = isLevelOverride;
 	}
-	public boolean isAvailable_for() {
+	
+	public int getAvailable_for() {
 		return available_for;
 	}
-	public void setAvailable_for(boolean available_for) {
+	public void setAvailable_for(int available_for) {
 		this.available_for = available_for;
 	}
 	public String getDescription() {

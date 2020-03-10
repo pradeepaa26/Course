@@ -1,14 +1,26 @@
 package com.courses.module.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="texts")
-public class Texts {
-
+public class Texts implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	@Column(name="`id`")
 	private int id;
@@ -16,6 +28,10 @@ public class Texts {
 	private String name;
 	@Column(name="`content`")
 	private String content;
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="`courseid`")
+	private Course courses;
 	public int getId() {
 		return id;
 	}
@@ -33,6 +49,12 @@ public class Texts {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public Course getCourses() {
+		return courses;
+	}
+	public void setCourses(Course courses) {
+		this.courses = courses;
 	}
  
 }

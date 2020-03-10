@@ -1,5 +1,6 @@
 package com.courses.module.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -10,8 +11,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name="categories")
 
-public class Categories {
+public class Categories implements Serializable {
 
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 @Id
 @Column(name="`id`")
 private int id;

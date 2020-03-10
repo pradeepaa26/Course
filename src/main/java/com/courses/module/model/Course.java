@@ -1,18 +1,31 @@
 package com.courses.module.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.lang.Nullable;
 @Entity
 @Table(name="courses")
-public class Course {
+public class Course  implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	@Column(name="`id`")
 	private int id;
@@ -25,8 +38,8 @@ public class Course {
 	@JoinColumn(name="`category_id`")
 	private Categories categories;
 	
-	@OneToMany
-	@JoinColumn(name="`course_id`")
+	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+//	@JoinColumn(name="`course_id`")
 	private List<CourseSubscribedVideos> CourseSubscribedVideoObj;
 	
 	public List<CourseSubscribedVideos> getCourseSubscribedVideoObj() {
@@ -35,16 +48,15 @@ public class Course {
 	public void setCourseSubscribedVideoObj(List<CourseSubscribedVideos> courseSubscribedVideoObj) {
 		CourseSubscribedVideoObj = courseSubscribedVideoObj;
 	}
-	public List<CourseSubscribedTexts> getCourseSubscribedTextObj() {
-		return CourseSubscribedTextObj;
-	}
-	public void setCourseSubscribedTextObj(List<CourseSubscribedTexts> courseSubscribedTextObj) {
-		CourseSubscribedTextObj = courseSubscribedTextObj;
-	}
-	@OneToMany
-	@JoinColumn(name="`courses_id`")
-	private List<CourseSubscribedTexts> CourseSubscribedTextObj;
+	@OneToMany(mappedBy = "courses", cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	private List<Texts> texts;
 	
+	public List<Texts> getTexts() {
+		return texts;
+	}
+	public void setTexts(List<Texts> texts) {
+		this.texts = texts;
+	}
 	@Column(name="`tag`")
 	private String tag;
 	@Column(name="`slug`")
@@ -52,7 +64,7 @@ public class Course {
 	@Column(name="`is_level_override`")
 	private boolean isLevelOverride;
 	@Column(name="`available_for`")
-	private boolean available_for;
+	private int available_for;
 	@Column(name="`description`")
 	private String description;
 	@Column(name="`meta_key`")
@@ -119,10 +131,11 @@ public class Course {
 	public void setLevelOverride(boolean isLevelOverride) {
 		this.isLevelOverride = isLevelOverride;
 	}
-	public boolean isAvailable_for() {
+	
+	public int getAvailable_for() {
 		return available_for;
 	}
-	public void setAvailable_for(boolean available_for) {
+	public void setAvailable_for(int available_for) {
 		this.available_for = available_for;
 	}
 	public String getDescription() {

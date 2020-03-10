@@ -3,6 +3,7 @@ package com.courses.module.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,8 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-//import com.courses.module.DAO.CourseDAOinterface;
-import com.courses.module.DTO.CourseDTO;
 import com.courses.module.DTO.UpdateDTO;
 import com.courses.module.model.Categories;
 import com.courses.module.model.Course;
@@ -27,7 +26,7 @@ public class Controller {
 	@Autowired
 	private CourseService service;
 
-	@GetMapping("/view")
+	@GetMapping(value="/view" ,produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Course> viewCourse() {
 		return service.view();
 	}
@@ -47,17 +46,14 @@ public class Controller {
 	public Course  viewbyId(@PathVariable int id) {
 		return service.viewbyId(id);
 	}
-	@GetMapping("/viewbyname/{name}")
-	public List<Course>  viewbyname(@PathVariable String name) {
-		return service.viewbyname(name);
-	}
+
 	@GetMapping("/viewvideos")
 	public List<Videos>  viewvideos() {
 		return service.viewvideos();
 	}
 
-	@GetMapping("/new")
-	public String insertCourse(@RequestBody CourseDTO dto) {
+	@PostMapping("/new")
+	public String insertCourse(@RequestBody Course dto) {
 		service.insert(dto);
 		return "insertion successful";
 	}
