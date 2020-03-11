@@ -40,7 +40,7 @@ delete(id:number)
   return this.http.delete("http://localhost:9000/remove/"+id);
 }
 
-addcourse(form : any, currentlyChecked: any){
+addcourse(form : any, currentlyChecked: any, coursevideo:any){
   // const data={
   //   name:form.coursename,
   //   levels:form.levels,
@@ -85,14 +85,17 @@ addcourse(form : any, currentlyChecked: any){
       "mode": "p",
       "active": true,
       "levelOverride": form.leveloverride,
-      "courseSubscribedVideoObj": [
-          {
-              "videos": {
-                  "id": form.videos
-              }
-          }    
-      ]
+  
+     "courseSubscribedVideoObj": coursevideo
+      //     {
+      //         "videos": {
+      //             "id": form.videos[0]
+      //         }
+      //     }    
+      // ]
+      
   }
+  //console.log(form.videos[1])
   return this.http.post("http://localhost:9000/new",{...body});
 }
 }

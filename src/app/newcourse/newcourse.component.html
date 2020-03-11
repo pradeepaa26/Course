@@ -93,7 +93,7 @@
         <div class="form-group row">
             <label for="videos" class="control-label col-sm-2">Video:</label>
             <div class="col-sm-5">
-                <select id="videos" class="form-control" formControlName="videos" multiple>
+                <select id="videos" class="form-control" formControlName="video" multiple>
                     <option value="" disabled selected>select</option>
                     <option *ngFor="let video of videos" [value]="video.id">{{video.name}}</option>
                 </select>

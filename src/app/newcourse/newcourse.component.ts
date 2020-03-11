@@ -10,12 +10,14 @@ enum CheckBoxType { presignup,sluglogin, dashboard,NONE};
   styleUrls: ['./newcourse.component.css']
 })
 export class NewcourseComponent implements OnInit {
+ 
 Levels :Array <any> =[];
 categories :Array <any> =[];
 videos:Array<any>=[];
 reactive:FormGroup;
 currentlyChecked: CheckBoxType;
 check_box_type = CheckBoxType;
+courseVideo :any;
   constructor(private course:CrudserviceService,private router:Router,private formbuilder:FormBuilder) { }
 
   ngOnInit(): void {
@@ -62,8 +64,16 @@ this.reactive=this.formbuilder.group({
   desc:[''],
   metakey:[''],
   metadesc:[''],
-  videos:['']
+  video:['']
 });
+
+// for(var i=1;i<this.reactive.get('video').value.length;i++)
+// {
+//   if(this.reactive.get('video').value[i]){  
+//     console.log(this.reactive.get('video').value[i]);
+//   this.courseVideo=   {video: {id: this.reactive.get('video').value}};
+//   }
+// }
 }
 selectCheckBox(targetType: CheckBoxType) {
   // If the checkbox was already checked, clear the currentlyChecked variable
@@ -80,7 +90,15 @@ selectCheckBox(targetType: CheckBoxType) {
 //   console.log(this.reactive.value);
 // }
 publish(){
-  this.course.addcourse(this.reactive.value,this.currentlyChecked).subscribe((res :any)=>{
+  
+for(var i=1;i<this.reactive.get('video').value.length;i++)
+{
+  if(this.reactive.get('video').value[i]){  
+    console.log(this.reactive.get('video').value[i]);
+  this.courseVideo=   {video: {id: this.reactive.get('video').value}};
+  }
+}
+  this.course.addcourse(this.reactive.value,this.currentlyChecked,this.courseVideo).subscribe((res :any)=>{
     alert(res)
 });
 
