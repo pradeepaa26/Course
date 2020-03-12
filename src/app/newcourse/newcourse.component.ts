@@ -13,11 +13,13 @@ export class NewcourseComponent implements OnInit {
  
 Levels :Array <any> =[];
 categories :Array <any> =[];
-videos:Array<any>=[];
+videoss:Array<any>=[];
 reactive:FormGroup;
 currentlyChecked: CheckBoxType;
 check_box_type = CheckBoxType;
 courseVideo :any;
+vid=[];
+v:Array<any>=[]
   constructor(private course:CrudserviceService,private router:Router,private formbuilder:FormBuilder) { }
 
   ngOnInit(): void {
@@ -31,7 +33,7 @@ courseVideo :any;
 viewvideos()
 {
   this.course.viewvideos().subscribe((res :any)=>{
-    this.videos=res;
+    this.videoss=res;
     console.log(res);
 });
 }
@@ -91,14 +93,28 @@ selectCheckBox(targetType: CheckBoxType) {
 // }
 publish(){
   
-for(var i=1;i<this.reactive.get('video').value.length;i++)
+for(var i=0;i<this.reactive.get('video').value.length;i++)
 {
   if(this.reactive.get('video').value[i]){  
-    console.log(this.reactive.get('video').value[i]);
+    //console.log(this.reactive.get('video').value[i]);
+    this.vid[i]=this.reactive.get('video').value[i];
+    
   this.courseVideo=   {video: {id: this.reactive.get('video').value}};
   }
 }
-  this.course.addcourse(this.reactive.value,this.currentlyChecked,this.courseVideo).subscribe((res :any)=>{
+for(i=0;i<this.vid.length;i++){
+  var obj={
+    id:this.vid[i]
+  }
+  var obj1={
+    videos:obj
+  }
+    this.v.push(obj1)
+
+}
+console.log(this.v)
+
+  this.course.addcourse(this.reactive.value,this.currentlyChecked,this.v).subscribe((res :any)=>{
     alert(res)
 });
 

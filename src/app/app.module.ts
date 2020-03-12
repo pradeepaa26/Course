@@ -10,6 +10,10 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CrudserviceService } from './crudservice.service';
 import { DetailsComponent } from './details/details.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { NavbarComponent } from './navbar/navbar.component';
+import { VideosComponent } from './videos/videos.component';
+import { VideoviewComponent } from './videoview/videoview.component';
+import { VideopipePipe } from './videopipe.pipe';
 
 @NgModule({
   declarations: [
@@ -17,7 +21,11 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     LoginComponent,
     NewcourseComponent,
     ViewComponent,
-    DetailsComponent
+    DetailsComponent,
+    NavbarComponent,
+    VideosComponent,
+    VideoviewComponent,
+    VideopipePipe
   ],
   imports: [
     BrowserModule,

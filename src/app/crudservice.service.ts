@@ -30,6 +30,10 @@ viewvideos()
 {
   return this.http.get("http://localhost:9000/viewvideos");
 }
+viewvideosbyid(id: number)
+{
+  return this.http.get("http://localhost:9000/viewvideosbyid/"+id);
+}
 
 modifystatus(id:number):Observable<any>
 {

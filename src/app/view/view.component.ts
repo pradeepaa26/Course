@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CrudserviceService } from '../crudservice.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-view',
   templateUrl: './view.component.html',

@@ -1,3 +1,7 @@
+<div>
+    <app-navbar></app-navbar>
+    </div>
+    
 <div class="container">
     <div>
     <h2 class="left">Courses</h2>
@@ -95,7 +99,7 @@
             <div class="col-sm-5">
                 <select id="videos" class="form-control" formControlName="video" multiple>
                     <option value="" disabled selected>select</option>
-                    <option *ngFor="let video of videos" [value]="video.id">{{video.name}}</option>
+                    <option *ngFor="let video of videoss" [value]="video.id">{{video.name}}</option>
                 </select>
             </div>
         </div>

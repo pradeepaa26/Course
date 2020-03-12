@@ -1,3 +1,7 @@
+<div>
+    <app-navbar></app-navbar>
+    </div>
+    
 <div class="container">
     <div>
         <h2 class="left">Courses</h2>
@@ -74,7 +78,7 @@
         </div>
         <div *ngIf=o.courseSubscribedVideoObj>
             <span *ngFor="let t of o.courseSubscribedVideoObj">
-                <a href=#>{{t.videos.url}}</a><br>
+                <a [routerLink]="['video']" [queryParams]="{ id: t.videos.id }">{{t.videos.url}}</a><br>
                 <!-- <ng-template *ngFor="let s of t.videos">{{s.name}}</ng-template> -->
             </span>
         </div>

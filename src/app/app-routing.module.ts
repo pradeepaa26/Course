@@ -4,13 +4,17 @@ import { LoginComponent } from './login/login.component';
 import { NewcourseComponent } from './newcourse/newcourse.component';
 import { ViewComponent } from './view/view.component';
 import { DetailsComponent } from './details/details.component';
+import { VideosComponent } from './videos/videos.component';
+import { VideoviewComponent } from './videoview/videoview.component';
 
 
 const routes: Routes = [
   {path: "login",component:LoginComponent},
   {path: "course",component:NewcourseComponent} ,
   {path: "view",component:ViewComponent},
-  {path:"view/details",component:DetailsComponent}
+  {path: "videos",component:VideosComponent},
+  {path:"view/details",component:DetailsComponent},
+  {path:"view/details/video",component:VideoviewComponent}
 ];
 
 @NgModule({
