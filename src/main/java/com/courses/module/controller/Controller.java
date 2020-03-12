@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.courses.module.DTO.CourseDTO;
 import com.courses.module.DTO.UpdateDTO;
+
 import com.courses.module.model.Categories;
 import com.courses.module.model.Course;
 import com.courses.module.model.Levels;
@@ -52,10 +54,15 @@ public class Controller {
 		return service.viewvideos();
 	}
 
+	@GetMapping("/viewvideosbyid/{id}")
+	public Videos  viewvideosbyid(@PathVariable int id) {
+		return service.viewvideosbyid(id);
+	}
+
 	@PostMapping("/new")
-	public String insertCourse(@RequestBody Course dto) {
+	public void insertCourse(@RequestBody Course dto) {
 		service.insert(dto);
-		return "insertion successful";
+		System.out.println( "insertion successful");
 	}
 
 	@PostMapping("/modify")

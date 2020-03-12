@@ -7,9 +7,12 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.courses.module.DAO.CourseDAOinterface;
+import com.courses.module.DTO.CourseDTO;
 import com.courses.module.DTO.UpdateDTO;
+
 import com.courses.module.model.Categories;
 import com.courses.module.model.Course;
+import com.courses.module.model.CourseSubscribedVideos;
 import com.courses.module.model.Levels;
 import com.courses.module.model.Videos;
 
@@ -20,6 +23,7 @@ public class CourseService {
 	Course course=new Course();
 	Levels level=new Levels();
 	Categories category=new Categories();
+	CourseSubscribedVideos videos= new CourseSubscribedVideos();
 	@Transactional
 	public List<Course> view() {
 		return dao.views();
@@ -33,8 +37,8 @@ public List<Categories> viewcategory() {
 		return dao.viewcategory();
 	}
 	@Transactional
-	public void insert(Course c) {	
-	    dao.insert(c);
+	public void insert(Course dto) {	
+	    dao.insert(dto);
 		
 	}
 	@Transactional
@@ -88,6 +92,10 @@ public List<Categories> viewcategory() {
 	public List<Videos> viewvideos() {
 		
 		return dao.viewvideos();
+	}
+	public Videos viewvideosbyid(int id) {
+	
+		return dao.viewvideobyId(id);
 	}
 	
 }

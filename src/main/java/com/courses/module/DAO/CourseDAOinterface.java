@@ -23,5 +23,6 @@ public interface CourseDAOinterface {
 	public void delete(int id);
 	public boolean modifystatus(int id);
 	public List<Videos> viewvideos();
+	public Videos viewvideobyId(int id);
 	
 }

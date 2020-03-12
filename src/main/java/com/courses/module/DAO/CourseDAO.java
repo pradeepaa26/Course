@@ -3,7 +3,6 @@ package com.courses.module.DAO;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,7 +49,10 @@ public class CourseDAO implements CourseDAOinterface{
 		 */
     	return(em.find(Course.class, id));
 }
-
+    @Override
+	public Videos viewvideobyId(int id) {
+		return(em.find(Videos.class, id));
+	}
 	@Override
 	public void insert(Course course) {
 		if(!CollectionUtils.isEmpty(course.getTexts())) 
@@ -115,5 +117,6 @@ public class CourseDAO implements CourseDAOinterface{
 		return course.isActive();
 	}
 	}
+	
 	
 }
